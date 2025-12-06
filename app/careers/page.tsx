@@ -69,7 +69,7 @@ export default function CareersPage() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="space-y-8"
                     >
@@ -88,7 +88,7 @@ export default function CareersPage() {
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="space-y-8"
                     >
@@ -114,11 +114,11 @@ export default function CareersPage() {
                                 <h3 className="text-xl font-bold uppercase mb-4">No Forms. Just Proof.</h3>
                                 <p className="text-white/60 mb-6">Send your portfolio or showreel directly to our team.</p>
                                 <a
-                                    href="mailto:careers@twinarcmotion.com"
+                                    href="mailto:av@twinarcmotion.com"
                                     className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-electric-blue hover:text-black transition-all duration-300 hover:scale-[1.02]"
                                 >
                                     <Mail className="w-5 h-5" />
-                                    Email Your Reel
+                                    Email Now
                                 </a>
                             </div>
                         </div>

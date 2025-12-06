@@ -11,22 +11,14 @@ export function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 50);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
-        if (mobileMenuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-        return () => {
-            document.body.style.overflow = "";
-        };
+        document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
     }, [mobileMenuOpen]);
 
     const navLinks = [
@@ -56,10 +48,12 @@ export function Navbar() {
                         : "bg-transparent border-transparent py-6"
                 )}
             >
-                {/* Global Grain Texture for Nav */}
+                {/* Grain overlay */}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
 
-                <div className="container mx-auto px-6 flex items-center justify-between relative z-10">
+                {/* FIXED HERE */}
+                <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between relative z-10">
+
                     {/* Logo */}
                     <Link href="/" className="relative h-12 w-48 transition-all duration-300 hover:opacity-80 z-20">
                         <img
@@ -69,7 +63,7 @@ export function Navbar() {
                         />
                     </Link>
 
-                    {/* Desktop Navigation */}
+                    {/* Desktop Nav */}
                     <div className="hidden lg:flex items-center gap-12">
                         {navLinks.map((link) => (
                             <Link
@@ -83,6 +77,7 @@ export function Navbar() {
                         ))}
                     </div>
 
+                    {/* CTA + Mobile Menu Button */}
                     <div className="flex items-center gap-4">
                         <Link href="/contact">
                             <Button
@@ -93,7 +88,6 @@ export function Navbar() {
                             </Button>
                         </Link>
 
-                        {/* Mobile Menu Toggle - Custom Hamburger */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="lg:hidden relative w-12 h-12 flex flex-col items-center justify-center gap-[6px] z-[60] group"
@@ -114,7 +108,7 @@ export function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu - Full Screen Overlay */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
@@ -124,25 +118,16 @@ export function Navbar() {
                         transition={{ duration: 0.4 }}
                         className="fixed inset-0 z-[55] lg:hidden"
                     >
-                        {/* Backdrop with blur and grain */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-neutral-950/95 backdrop-blur-3xl"
-                        >
+                        <motion.div className="absolute inset-0 bg-neutral-950/95 backdrop-blur-3xl">
                             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05]" />
                         </motion.div>
 
-                        {/* Close Button */}
                         <motion.button
                             initial={{ opacity: 0, rotate: -90 }}
                             animate={{ opacity: 1, rotate: 0 }}
                             exit={{ opacity: 0, rotate: 90 }}
-                            transition={{ duration: 0.3 }}
                             onClick={() => setMobileMenuOpen(false)}
                             className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
-                            aria-label="Close menu"
                         >
                             <svg
                                 width="24"
@@ -160,7 +145,6 @@ export function Navbar() {
                             </svg>
                         </motion.button>
 
-                        {/* Menu Content */}
                         <div className="relative h-full flex flex-col justify-center items-center px-6">
                             <nav className="flex flex-col items-center gap-6">
                                 {navLinks.map((link, index) => (
@@ -169,11 +153,7 @@ export function Navbar() {
                                         initial={{ opacity: 0, y: 40 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 20 }}
-                                        transition={{
-                                            duration: 0.4,
-                                            delay: index * 0.1,
-                                            ease: [0.25, 0.46, 0.45, 0.94]
-                                        }}
+                                        transition={{ duration: 0.4, delay: index * 0.1 }}
                                     >
                                         <Link
                                             href={link.href}
@@ -188,7 +168,6 @@ export function Navbar() {
                                 ))}
                             </nav>
 
-                            {/* CTA Button */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -197,9 +176,7 @@ export function Navbar() {
                                 className="mt-16"
                             >
                                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                                    <Button
-                                        className="bg-white text-black hover:bg-electric-blue hover:text-black transition-all duration-300 text-lg px-10 py-6 rounded-full font-bold uppercase tracking-wider"
-                                    >
+                                    <Button className="bg-white text-black hover:bg-electric-blue hover:text-black transition-all duration-300 text-lg px-10 py-6 rounded-full font-bold uppercase tracking-wider">
                                         Start a Project
                                     </Button>
                                 </Link>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Instagram, Facebook, Youtube, MapPin, Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Instagram, Facebook, Youtube } from "lucide-react";
 
 export function Footer() {
     return (
@@ -14,7 +14,8 @@ export function Footer() {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
             </div>
 
-            <div className="container mx-auto px-4 md:px-6 relative z-10">
+            {/* FIXED HERE */}
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                 {/* TOP SECTION: CTA & LINKS */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24 md:mb-32">
 
@@ -60,12 +61,12 @@ export function Footer() {
                         <ul className="space-y-4 flex flex-col items-center md:items-start">
                             <li>
                                 <a href="mailto:hello@twinarcmotion.com" className="text-white/70 hover:text-electric-blue transition-colors text-sm font-medium tracking-wide">
-                                    hello@twinarcmotion.com
+                                    av@twinarcmotion.com
                                 </a>
                             </li>
                             <li>
                                 <a href="tel:+919876543210" className="text-white/70 hover:text-electric-blue transition-colors text-sm font-medium tracking-wide">
-                                    +91 98765 43210
+                                    +91 91013 54709
                                 </a>
                             </li>
                             <li className="text-white/40 text-sm leading-relaxed pt-2">
@@ -78,11 +79,7 @@ export function Footer() {
                     <div className="md:col-span-2 text-center md:text-left">
                         <h3 className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-8">Follow</h3>
                         <ul className="space-y-4 flex flex-col items-center md:items-start">
-                            {[
-                                { name: "Instagram", icon: Instagram },
-                                { name: "Facebook", icon: Facebook },
-                                { name: "YouTube", icon: Youtube }
-                            ].map((social) => (
+                            {[{ name: "Instagram", icon: Instagram }, { name: "Facebook", icon: Facebook }, { name: "YouTube", icon: Youtube }].map((social) => (
                                 <li key={social.name}>
                                     <Link href="#" className="flex items-center gap-3 text-white/70 hover:text-electric-blue transition-colors group">
                                         <social.icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
@@ -116,7 +113,10 @@ export function Footer() {
                             © {new Date().getFullYear()} TWINARC MOTION.
                         </p>
                         <p className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest uppercase flex items-center gap-1">
-                            Cinematic Intelligence <span className="w-1 h-1 rounded-full bg-electric-blue" /> <a href="https://dekarusys.dev/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-electric-blue transition-colors font-bold">Designed by Dekarusys</a>
+                            Cinematic Intelligence <span className="w-1 h-1 rounded-full bg-electric-blue" />
+                            <a href="https://dekarusys.dev/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-electric-blue transition-colors font-bold">
+                                Designed by Dekarusys
+                            </a>
                         </p>
                     </div>
                 </div>

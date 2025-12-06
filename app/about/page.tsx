@@ -171,7 +171,6 @@ export default function AboutPage() {
             <Navbar />
             <ImmersiveHero />
             <VisionSection />
-            <VisionSection />
             <FinalCTA />
             <Footer />
         </main>

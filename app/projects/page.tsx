@@ -7,8 +7,7 @@ import { useState } from "react";
 import { ProjectCard, Project } from "@/components/projects/project-card";
 import { VideoModal } from "@/components/projects/video-modal";
 
-// PORTFOLIO DATA (Cinematic)
-// PORTFOLIO DATA (Cinematic)
+// PROJECTS DATA
 const PROJECTS: Project[] = [
     {
         id: 1,
@@ -17,26 +16,19 @@ const PROJECTS: Project[] = [
         client: "TwinArc Originals",
         year: "2025",
         image: "/miling-poster.jpg",
+        videoUrl: "/Video_Generation_Continues (1).mp4",
         size: "featured"
     }
 ];
-
-const CATEGORIES = ["All", "Commercial", "Narrative", "Visual FX"];
 
 export default function ProjectsPage() {
     const [activeFilter, setActiveFilter] = useState("All");
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-    const filteredProjects = activeFilter === "All"
-        ? PROJECTS
-        : PROJECTS.filter(p => p.category === activeFilter);
-
-    // Dynamic grid classes for editorial layout
-    const getGridClass = (index: number, size: string) => {
-        if (size === "featured") return "col-span-1 md:col-span-2 lg:col-span-3 mb-12";
-        if (index % 3 === 1) return "col-span-1 md:col-span-2"; // Asymmetric wide items
-        return "col-span-1";
-    };
+    const filteredProjects =
+        activeFilter === "All"
+            ? PROJECTS
+            : PROJECTS.filter((p) => p.category === activeFilter);
 
     return (
         <main className="min-h-screen bg-black text-white selection:bg-electric-blue selection:text-white">
@@ -47,7 +39,9 @@ export default function ProjectsPage() {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.4]" />
             </div>
 
-            <div className="container mx-auto px-4 md:px-6 relative z-10 pt-32 md:pt-48 mb-40">
+            {/* FIXED MAIN WRAPPER */}
+            <div className="w-full max-w-screen-xl mx-auto px-4 md:px-6 relative z-10 pt-32 md:pt-48 mb-40">
+
                 {/* HEADER */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 px-2">
                     <motion.div
@@ -56,16 +50,21 @@ export default function ProjectsPage() {
                         className="max-w-2xl"
                     >
                         <h1 className="text-[12vw] md:text-[8vw] font-heading font-bold text-white leading-[0.85] uppercase tracking-tighter mb-4">
-                            Selected<br /><span className="text-electric-blue">Works</span>
+                            Selected<br />
+                            <span className="text-electric-blue">Works</span>
                         </h1>
                     </motion.div>
                 </div>
 
                 {/* EDITORIAL GRID */}
                 <div className="mb-32 relative">
-                    {/* Atmospheric Background Glow */}
+
+                    {/* Background Glows (safe now because wrapper is bounded) */}
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                        <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] bg-electric-blue/10 blur-[120px] rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '4s' }} />
+                        <div
+                            className="absolute top-[10%] left-[20%] w-[500px] h-[500px] bg-electric-blue/10 blur-[120px] rounded-full mix-blend-screen animate-pulse"
+                            style={{ animationDuration: "4s" }}
+                        />
                         <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-purple-900/20 blur-[100px] rounded-full mix-blend-screen" />
                     </div>
 
@@ -74,9 +73,11 @@ export default function ProjectsPage() {
                         animate={{ opacity: 1 }}
                         className="w-full relative z-10"
                     >
-                        {/* FEATURED PROJECT: MILONG */}
+
+                        {/* FEATURED PROJECT */}
                         <div className="flex flex-col md:flex-row gap-8 md:gap-20 items-center justify-center mb-32">
-                            {/* 3D TILT POSTER */}
+
+                            {/* 3D Tilt Poster */}
                             <motion.div
                                 className="relative w-full max-w-[340px] perspective-1000 group"
                                 initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
@@ -92,7 +93,7 @@ export default function ProjectsPage() {
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
-                                    {/* Play Button Overlay */}
+                                    {/* Play button */}
                                     <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-90 group-hover:scale-100">
                                         <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-2xl">
                                             <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1" />
@@ -129,7 +130,9 @@ export default function ProjectsPage() {
 
                                     <p className="text-white/70 text-lg md:text-xl font-light leading-relaxed max-w-lg mx-auto md:mx-0">
                                         A journey into the heart of the Mising tribe.
-                                        <span className="text-white block mt-2 font-normal">"Milong" explores the delicate balance between tradition and modernity.</span>
+                                        <span className="text-white block mt-2 font-normal">
+                                            "Milong" explores the delicate balance between tradition and modernity.
+                                        </span>
                                     </p>
                                 </motion.div>
 
@@ -143,10 +146,14 @@ export default function ProjectsPage() {
                                         <span className="text-[10px] text-white/30 uppercase tracking-widest">Year</span>
                                         <span className="text-sm text-white font-medium tracking-wider">{PROJECTS[0].year}</span>
                                     </div>
+
                                     <div className="w-[1px] h-10 bg-white/10 mx-2" />
+
                                     <div className="flex flex-col gap-1">
                                         <span className="text-[10px] text-white/30 uppercase tracking-widest">Language</span>
-                                        <span className="text-sm text-electric-blue font-medium tracking-wider">Assamese / Mising</span>
+                                        <span className="text-sm text-electric-blue font-medium tracking-wider">
+                                            Assamese / Mising
+                                        </span>
                                     </div>
                                 </motion.div>
 
@@ -163,7 +170,7 @@ export default function ProjectsPage() {
                             </div>
                         </div>
 
-                        {/* COMING SOON: "CLASSIFIED" STYLE */}
+                        {/* CLASSIFIED BLOCK */}
                         <motion.div
                             className="w-full max-w-4xl mx-auto border border-white/5 rounded-2xl bg-white/[0.02] backdrop-blur-sm relative overflow-hidden group"
                             initial={{ opacity: 0, y: 50 }}
@@ -177,7 +184,9 @@ export default function ProjectsPage() {
                             <div className="p-12 md:p-20 text-center relative z-10">
                                 <div className="inline-flex items-center gap-2 mb-6 opacity-50">
                                     <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">Production Pipeline</span>
+                                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">
+                                        Production Pipeline
+                                    </span>
                                 </div>
 
                                 <h3 className="text-3xl md:text-5xl font-heading font-bold text-white/20 group-hover:text-white/40 transition-colors duration-500 mb-4">

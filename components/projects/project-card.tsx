@@ -12,6 +12,7 @@ export interface Project {
     client: string;
     year: string;
     image: string;
+    videoUrl?: string;
     size: "small" | "medium" | "large" | "featured";
 }
 

@@ -62,19 +62,26 @@ export function VideoModal({ isOpen, onClose, project }: VideoModalProps) {
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Placeholder Video Player */}
-                        <div className="absolute inset-0 flex items-center justify-center bg-neutral-900 group">
-                            {/* In a real app, this would be a URL or ID passed from the project */}
-                            <div className="text-center">
-                                <p className="text-electric-blue font-conthrax text-sm tracking-widest uppercase mb-4">Now Playing</p>
-                                <h2 className="text-4xl md:text-6xl font-heading font-bold text-white">{project.title}</h2>
-                                <p className="text-white/40 mt-2">Video playback demo</p>
+                        {project.videoUrl ? (
+                            <video
+                                src={project.videoUrl}
+                                className="w-full h-full object-contain"
+                                controls
+                                autoPlay
+                                playsInline
+                            />
+                        ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-neutral-900 group">
+                                <div className="text-center">
+                                    <p className="text-electric-blue font-conthrax text-sm tracking-widest uppercase mb-4">Now Playing</p>
+                                    <h2 className="text-4xl md:text-6xl font-heading font-bold text-white">{project.title}</h2>
+                                    <p className="text-white/40 mt-2">Video playback demo (No URL provided)</p>
+                                </div>
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
+                                    <div className="h-full bg-electric-blue w-1/3" />
+                                </div>
                             </div>
-
-                            {/* Fake Playhead */}
-                            <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
-                                <div className="h-full bg-electric-blue w-1/3" />
-                            </div>
-                        </div>
+                        )}
                     </motion.div>
 
                     {/* Info Footer */}
